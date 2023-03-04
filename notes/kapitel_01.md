@@ -17,3 +17,17 @@
    - Variable `currentView` auf Wert `menu` setzen
 9. Klick auf Button `Neue Schätzung erstellen` mit `gotoEstimationCreation` verknüpfen
 10. Klick auf Button `Zurück` mit `gotoMenu` verknüpfen
+11. Formular in `create_estimation` erstellen
+    - Label + Text-Input + br für Titel
+    - Label + TextArea + br für Beschreibung
+    - Button `Zurück` mit `type=button` versehen und in Formular verschieben
+    - Neuen Button `Speichern` mit `type=submit` erstellen
+12. Variable `estimations` als leeres Array hinzufügen
+13. Variable `newEstimation` als Objekt-Literal `{title: "", description: ""}` hinzufügen
+14. Attribute des Estimation-Objekts an die beiden Formularfelder binden
+15. Funktion `submitEstimation` erzeugen
+    - `newEstimation` klonen und in `estimations` speichern 
+    - `gotoMenu` aufrufen
+16. Submit des Fromulars mit `submitEstimation` verknüpfen
+17. Variable `newEstimation` reaktiv zurücksetzen, wenn der `currentView` ist nicht `create_estimation`
+    - `newEstimation = currentView === "create_estimation" ? newEstimation : {title: "", description: ""}` 
