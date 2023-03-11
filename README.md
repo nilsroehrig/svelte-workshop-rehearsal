@@ -28,7 +28,7 @@ npm run build
 
 Nachdem die Applikation gebaut wurde, kann man eine Vorschau des gebauten Standes im Browser betrachten:
 ```bash
-npm run previeww
+npm run preview
 ```
 
 ### Linting und Formatierung

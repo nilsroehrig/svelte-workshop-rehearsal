@@ -15,7 +15,7 @@
 7. `{:else}`-Block mit Liste aus 2. füllen
 8. Funktion `gotoMenu` erzeugen
    - Variable `currentView` auf Wert `menu` setzen
-9. Klick auf Button `Neue Schätzung erstellen` mit `gotoEstimationCreation` verknüpfen
+9.  Klick auf Button `Neue Schätzung erstellen` mit `gotoEstimationCreation` verknüpfen
 10. Klick auf Button `Zurück` mit `gotoMenu` verknüpfen
 11. Formular in `create_estimation` erstellen
     - Label + Text-Input + br für Titel
@@ -28,6 +28,15 @@
 15. Funktion `submitEstimation` erzeugen
     - `newEstimation` klonen und in `estimations` speichern 
     - `gotoMenu` aufrufen
-16. Submit des Fromulars mit `submitEstimation` verknüpfen
-17. Variable `newEstimation` reaktiv zurücksetzen, wenn der `currentView` ist nicht `create_estimation`
+16. Submit des Formulars mit `submitEstimation` verknüpfen
+17. Variable `newEstimation` reaktiv zurücksetzen, wenn der `currentView` nicht `create_estimation` ist
     - `newEstimation = currentView === "create_estimation" ? newEstimation : {title: "", description: ""}` 
+18. Funktion `gotoEstimationList` erstellen
+    - Variable `currentView` auf Wert `show_estimations` setzen
+19. Verzweigung im `{#if}`-Block für `currentView === "show_estimations"` hinzufügen
+    - Überschrift auf `Vorherige Schätzungen` setzen
+    - `{#each}`-Block für Schätzungen mit `title` als Key erstellen
+    - Button `Zurück` erstellen und mit `gotoMenu` verknüpfen
+    - Im `{#each}`-Block einen `<article>` mit einem `<header>` für `<h2>{title}</h2>` und einem `<p>` für `description` erstellen
+    - Im `{#each}`-Block eine `{:else}`-Verzweigung mit Nachricht erstellen, falls keine Schätzungen erstellt wurden
+20. Im Menü-View den Button `Vorherige Schätzungen betrachten` mit `gotoEstimationList` verknüpfen
