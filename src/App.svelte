@@ -1,4 +1,5 @@
 <script>
+  import EstimationList from "./lib/pages/EstimationList.svelte";
   import Menu from "./lib/pages/Menu.svelte";
 
   let currentView = "menu";
@@ -51,16 +52,7 @@
       <button type="submit">Speichern</button>
     </form>
   {:else if currentView === "show_estimations"}
-    <h1>Vorherige Schätzungen</h1>
-    {#each estimations as estimation (estimation.title)}
-      <article>
-        <header><h2>{estimation.title}</h2></header>
-        <p>{estimation.description}</p>
-      </article>
-    {:else}
-      <p>Bislang wurde noch nichts geschätzt.</p>
-    {/each}
-    <button type="button" on:click={gotoMenu}>Zurück</button>
+    <EstimationList {estimations} on:navigation:goto={setPage} />
   {:else}
     <Menu on:navigation:goto={setPage} />
   {/if}
