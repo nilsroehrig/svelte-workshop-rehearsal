@@ -1,4 +1,6 @@
 <script>
+  import Menu from "./lib/pages/Menu.svelte";
+
   let currentView = "menu";
   let estimations = [];
 
@@ -7,21 +9,27 @@
       ? newEstimation
       : { title: "", description: "" };
 
-  function gotoEstimationCreation() {
-    currentView = "create_estimation";
-  }
-
   function gotoMenu() {
     currentView = "menu";
-  }
-
-  function gotoEstimationList() {
-    currentView = "show_estimations";
   }
 
   function submitEstimation() {
     estimations = [...estimations, { ...newEstimation }];
     gotoMenu();
+  }
+
+  function setPage({ detail }) {
+    switch (detail?.page) {
+      case "create_estimation":
+        currentView = "create_estimation";
+        break;
+      case "show_estimations":
+        currentView = "show_estimations";
+        break;
+      case "menu":
+      default:
+        currentView = "menu";
+    }
   }
 </script>
 
@@ -54,18 +62,6 @@
     {/each}
     <button type="button" on:click={gotoMenu}>Zurück</button>
   {:else}
-    <h1>Svestimator</h1>
-    <ul>
-      <li>
-        <button on:click={gotoEstimationCreation}
-          >Neue Schätzung erstellen</button
-        >
-      </li>
-      <li>
-        <button on:click={gotoEstimationList}
-          >Vorherige Schätzungen betrachten</button
-        >
-      </li>
-    </ul>
+    <Menu on:navigation:goto={setPage} />
   {/if}
 </main>
