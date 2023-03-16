@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher, getContext } from "svelte";
+  import Trash from "../components/icons/Trash.svelte";
 
   const dispatch = createEventDispatcher();
 
@@ -17,14 +18,16 @@
     ? estimation.created.toLocaleDateString()
     : "unbekannt"}
   <article>
-    <header><h2>{estimation.title}</h2></header>
+    <header>
+      <h2>{estimation.title}</h2>
+      <button
+        class="delete-button"
+        type="button"
+        on:click={() => estimations.remove(estimation.id)}><Trash /></button
+      >
+    </header>
     <p>Erstellt: {dateAsString}</p>
     <p>{estimation.description}</p>
-    <p>
-      <button type="button" on:click={() => estimations.remove(estimation.id)}
-        >Löschen</button
-      >
-    </p>
   </article>
 {:else}
   <p>Bislang wurde noch nichts geschätzt.</p>
@@ -38,8 +41,23 @@
     text-align: center;
   }
 
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   h2 {
     margin: 0;
     font-size: 1rem;
+  }
+
+  .delete-button {
+    display: inline-flex;
+    border: none;
+    background: transparent;
+    width: auto;
+    padding: 0;
+    margin: 0;
   }
 </style>
