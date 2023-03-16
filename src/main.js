@@ -1,4 +1,5 @@
 import "./app.css";
+import "@picocss/pico";
 import App from "./App.svelte";
 import { createEstimationStore } from "./lib/stores/estimations";
 

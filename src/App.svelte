@@ -20,7 +20,7 @@
   }
 </script>
 
-<main>
+<main class="container">
   {#if currentView === "create_estimation"}
     <EstimationCreation on:navigation:goto={setPage} />
   {:else if currentView === "show_estimations"}

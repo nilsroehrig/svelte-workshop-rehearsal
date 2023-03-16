@@ -21,6 +21,7 @@
     "vite": "^4.1.4"
   },
   "dependencies": {
+    "@picocss/pico": "^1.5.7",
     "eslint-config-prettier": "^8.6.0"
   }
 }
