@@ -23,3 +23,20 @@
     >
   </li>
 </ul>
+
+<style>
+  h1 {
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  ul {
+    padding: 0;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  li {
+    list-style: none;
+  }
+</style>
