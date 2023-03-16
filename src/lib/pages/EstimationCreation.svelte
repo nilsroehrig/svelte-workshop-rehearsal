@@ -32,3 +32,15 @@
   <button type="button" on:click={gotoMenu}>Zurück</button>
   <button type="submit">Speichern</button>
 </form>
+
+<style>
+  h1 {
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  form {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+</style>

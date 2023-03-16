@@ -8,3 +8,6 @@
    - `h1` zentriert mit 2rem y-Abstand
    - `ul` zentriert ohne Innenabstand und max. 640 Breite
    - `li` ohne Listen-Stil
+6. In `EstimationCreation.svelte`, füge `<style>`-Block hinzu
+   - `h1` zentriert mit 2rem y-Abstand
+   - `form` zentriert und max. 640 Breite
