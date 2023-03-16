@@ -12,10 +12,19 @@
 
 <h1>Vorherige Schätzungen</h1>
 
-{#each $estimations as estimation (estimation.title)}
+{#each $estimations as estimation (estimation.id)}
+  {@const dateAsString = estimation.created
+    ? estimation.created.toLocaleDateString()
+    : "unbekannt"}
   <article>
     <header><h2>{estimation.title}</h2></header>
+    <p>Erstellt: {dateAsString}</p>
     <p>{estimation.description}</p>
+    <p>
+      <button type="button" on:click={() => estimations.remove(estimation.id)}
+        >Löschen</button
+      >
+    </p>
   </article>
 {:else}
   <p>Bislang wurde noch nichts geschätzt.</p>

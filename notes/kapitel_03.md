@@ -32,12 +32,12 @@
 14. Präfixe `estimations` im `{#each}`-Block mit `$` um über Store-Inhalt zu iterieren
 15. In `estimations.js`, aktualisiere Store-Objekt wie folgt:
     - `add`-Methode:
-      - Erweitere neue Schätzung in `newValue` um 
+      - Erweitere neue Schätzung in `newValue` um
         - `id = crypto.randomUUID()`
         - `created = new Date()`
     - Erstelle `remove`-Methode mit `id` als Parameter
       - Aktualisiere Store mit `newValue` = gefilterten Schätzungen nach ID
-      - Speichere Aktualisierung im LocalStorage
+      - Speichere Aktualisierung JSON-stringified im LocalStorage
 16. Erweitere `try`-Block in `getInitialValue`:
     - Mappe Estimations nach dem Parsen auf neue Objekte:
       - `id: crypto.randomUUID()`,
@@ -45,3 +45,8 @@
       - `...rest`
     - Speichere gemappte Estimations im LocalStorage
     - Gib gemappte Estimations zurück
+17. In `EstimationList.svelte`, ersetze `each`-Key durch `estimation.id`
+18. Füge lokale Konstante im `{#each}`-Block für formatiertes Datum hinzu:
+    - `{@const dateAsString = estimation.created ? estimation.created.toLocaleDateString() : "unbekannt"}`
+19. Füge neue Zeile `Erstellt: {dateAsString}` hinzu
+20. Füge neue Zeile mit `Löschen`-Button und Klick-Handler `() => estimations.remove(estimation.id)` hinzu

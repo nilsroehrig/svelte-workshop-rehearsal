@@ -31,7 +31,7 @@ export function createEstimationStore({ useLocalStorage = true }) {
         const newValue = estimations.filter(
           (estimation) => estimation.id !== id
         );
-        localStorage.setItem(STORAGE_KEY, newValue);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(newValue));
         return newValue;
       });
     },
