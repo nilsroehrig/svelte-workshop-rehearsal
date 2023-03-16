@@ -40,6 +40,29 @@
       - speichere das Ergebnis von `estimations.add` in `addedEstimation`
       - ersetze navigation-argumente durch `{ page: "create_stories", params: { id: addedEstimation.id }}`
     - Benenne Button `Speichern` in `Weiter` um
+25. Erstelle neue Datei `src/lib/pages/StoryCreation.svelte`
+    - Importiere `getContext` und `createEventDispatcher`
+    - Erstelle Prop `estimations` mit Schätzungs-Kontext als Vorgabewert 
+    - Erstelle Prop `id`
+    - Erstelle reaktives Statement mit `estimation = estimations.find(byId)`
+    - Erstelle reaktives Statement mit `if(estimation) estimation.stories = estimation.stories ?? []`
+    - Erstelle Funktion `gotoMenu`
+    - Erstelle Überschrift `Stories erstellen`
+    - Erstelle Card mit 
+      - `estimation.title` als Header
+      - `<p>Bislang hat diese Schätzung noch keine Stories.</p>` als Body
+    - Erstelle Accordion mit `Beschreibung` als `<summary>` und `estimation.description` als Content
+    - Erstelle Zurück-Button mit `gotoMenu`
+    - Erstele styles für Überschrift und 0-margin für `article p`
+26. In `App.svelte`
+    - Importiere `StoryCreation.svelte`
+    - Erstelle Variable `viewArgs = {}`
+    - Ersetze `switch`-Block in `setPage` mit
+      - `currentView = detail?.page`
+      - `viewArgs = detail?.params`
+    - Füge Zweig füe `create_stories` hinzu
+      - `<StoryCreation on:navigation:goto={setPage} id={viewArgs?.id} />`
+
 
 ## Trash Icon
 
