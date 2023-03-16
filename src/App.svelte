@@ -4,7 +4,6 @@
   import Menu from "./lib/pages/Menu.svelte";
 
   let currentView = "menu";
-  let estimations = [];
 
   function setPage({ detail }) {
     switch (detail.page) {
@@ -19,21 +18,13 @@
         currentView = "menu";
     }
   }
-
-  function addEstimation({ detail }) {
-    estimations = [...estimations, detail.estimation];
-    setPage({ detail: { page: "menu" } });
-  }
 </script>
 
 <main>
   {#if currentView === "create_estimation"}
-    <EstimationCreation
-      on:navigation:goto={setPage}
-      on:estimation:create={addEstimation}
-    />
+    <EstimationCreation on:navigation:goto={setPage} />
   {:else if currentView === "show_estimations"}
-    <EstimationList {estimations} on:navigation:goto={setPage} />
+    <EstimationList on:navigation:goto={setPage} />
   {:else}
     <Menu on:navigation:goto={setPage} />
   {/if}

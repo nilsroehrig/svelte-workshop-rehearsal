@@ -1,12 +1,15 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, getContext } from "svelte";
 
   const dispatch = createEventDispatcher();
+  
+  export let estimations = getContext("estimations");
 
   let estimation = { title: "", description: "" };
 
   function submitEstimation() {
-    dispatch("estimation:create", { estimation });
+    estimations.add(estimation);
+    dispatch("navigation:goto", { page: "menu" });
   }
 
   function gotoMenu() {

@@ -10,13 +10,23 @@
    - Erzeuge und gebe Objekt-Literal zurück
      - Setze `subscribe`-Methode auf `store.subscribe`
      - Erzeuge `add`-Methode mit Argument `estimation`
-       - Rufe `store.update` mit Anonymer Funktion als Argument auf 
+       - Rufe `store.update` mit Anonymer Funktion als Argument auf
          - Erzeuge Variable `newValue = [...estimations, estimation]`
          - Gebe `newValue` zurück
 6. Erzeuge Funktion `getInitialValue` mit Argument `useLocalStorage`
-    - Falls `useLocalStorage` falsy ist, gebe leeres Array zurück
-    - Lese Item `STORAGE_KEY` aus localStorage in Variable `storageItem`
-    - Falls `storageItem === null` ist, gebe leeres Array zurück
-    - Versuche `storageItem` als JSON zu parsen
-      - Falls erfolgreich, gebe Ergebnis zurück
-      - Falls ein Fehler auftritt, logge und gebe leeres Array zurück
+   - Falls `useLocalStorage` falsy ist, gebe leeres Array zurück
+   - Lese Item `STORAGE_KEY` aus localStorage in Variable `storageItem`
+   - Falls `storageItem === null` ist, gebe leeres Array zurück
+   - Versuche `storageItem` als JSON zu parsen
+     - Falls erfolgreich, gebe Ergebnis zurück
+     - Falls ein Fehler auftritt, logge und gebe leeres Array zurück
+7. Füge via `createEstimationStore` den Kontext-Eintrag `estimations` in `main.js` zum Komponenetenrendering hinzu
+8. In `App.svelte`, lösche Variable `estimations`
+9. Entferne Funktion und Event-Handler `addEstimation` von `EstimationCreation`-Komponente
+10. Enferne Prop `estimation` von EstimationLis`-Komponente
+11. In `EstimationCreation.svelte`, füge Prop `estimations` mit Vorgabewert `getContext('estimations')` hinzu
+12. Ändere `submitEstimation`
+    - Nutze `estimations.add` zum Hinzufügen der Estimation
+    - Ersetze dipatchtes Event durch `navigation:goto` mit Argument `{ page: 'menu' }`
+13. In `EstimationList.svelte`, initialisiere Prop `estimations` mit `getContext('estimations')`
+14. Präfixe `estimations` im `{#each}`-Block mit `$` um über Store-Inhalt zu iterieren
