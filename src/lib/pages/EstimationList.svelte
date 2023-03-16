@@ -31,3 +31,15 @@
 {/each}
 
 <button type="button" on:click={gotoMenu}>Zurück</button>
+
+<style>
+  h1 {
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 1rem;
+  }
+</style>
