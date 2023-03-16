@@ -53,7 +53,7 @@
       - `<p>Bislang hat diese Schätzung noch keine Stories.</p>` als Body
     - Erstelle Accordion mit `Beschreibung` als `<summary>` und `estimation.description` als Content
     - Erstelle Zurück-Button mit `gotoMenu`
-    - Erstele styles für Überschrift und 0-margin für `article p`
+    - Erstele styles für Überschrift und 0-margin für `article > p`
 26. In `App.svelte`
     - Importiere `StoryCreation.svelte`
     - Erstelle Variable `viewArgs = {}`
@@ -62,6 +62,9 @@
       - `viewArgs = detail?.params`
     - Füge Zweig füe `create_stories` hinzu
       - `<StoryCreation on:navigation:goto={setPage} id={viewArgs?.id} />`
+27. Erstelle neue Datei `src/lib/components/icons/Plus.svelte` mit unten angezeigtem Inhalt
+28. Füge `<Button>` in Variante `unstyled` mit `<Plus>` zum Card-Header hinzu
+29. Mache `<header>` zu `flex` mit `space-between` und `center` 
 
 
 ## Trash Icon
@@ -101,4 +104,31 @@
   padding: 0;
   margin: 0;
 }
+```
+
+## Plus Icon
+
+```html
+<script>
+  export let title = "Neu";
+  export let width = 24;
+  export let height = 24;
+</script>
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+  {width}
+  {height}
+>
+  <title>{title}</title>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 4.5v15m7.5-7.5h-15"
+  />
+</svg>
 ```

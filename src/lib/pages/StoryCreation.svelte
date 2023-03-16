@@ -1,5 +1,7 @@
 <script>
   import { createEventDispatcher, getContext } from "svelte";
+  import Button from "../components/Button.svelte";
+  import Plus from "../components/icons/Plus.svelte";
 
   const dispatch = createEventDispatcher();
 
@@ -19,24 +21,33 @@
 <h1>Stories Erstellen</h1>
 
 <article>
-  <header><strong>{estimation.title}</strong></header>
+  <header>
+    <strong>{estimation.title}</strong>
+    <Button variant="unstyled"><Plus /></Button>
+  </header>
   <p>Bislang hat diese Schätzung noch keine Stories.</p>
 </article>
 
 <details>
-    <summary>Beschreibung</summary>
-    <p>{estimation.description}</p>
+  <summary>Beschreibung</summary>
+  <p>{estimation.description}</p>
 </details>
 
 <button on:click={gotoMenu}>Zurück</button>
 
 <style>
-    h1 {
-        margin: 2rem 0;
-        text-align: center;
-    }
+  h1 {
+    margin: 2rem 0;
+    text-align: center;
+  }
 
-    article p {
-        margin: 0;
-    }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  article > p {
+    margin: 0;
+  }
 </style>
