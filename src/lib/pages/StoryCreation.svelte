@@ -2,11 +2,17 @@
   import { createEventDispatcher, getContext } from "svelte";
   import Button from "../components/Button.svelte";
   import Plus from "../components/icons/Plus.svelte";
+  import XMark from "../components/icons/XMark.svelte";
 
   const dispatch = createEventDispatcher();
 
   export let estimations = getContext("estimations");
   export let id;
+
+  let story = {
+    open: false,
+    text: "",
+  };
 
   $: estimation = $estimations.find(({ id: eid }) => eid === id);
   $: if (estimation) {
@@ -23,8 +29,31 @@
 <article>
   <header>
     <strong>{estimation.title}</strong>
-    <Button variant="unstyled"><Plus /></Button>
+    <Button
+      variant="unstyled"
+      on:click={() => (story.open = !story.open)}
+    >
+      {#if story.open}
+        <XMark />
+      {:else}
+        <Plus />
+      {/if}
+    </Button>
   </header>
+
+  {#if story.open}
+    <form on:submit|preventDefault>
+      <input
+        type="text"
+        maxlength="60"
+        required
+        bind:value={story.text}
+        placeholder="Storytext..."
+      />
+      <button type="submit">Erstellen</button>
+    </form>
+  {/if}
+
   <p>Bislang hat diese Schätzung noch keine Stories.</p>
 </article>
 
@@ -49,5 +78,11 @@
 
   article > p {
     margin: 0;
+  }
+
+  form {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    gap: 0.5rem;
   }
 </style>

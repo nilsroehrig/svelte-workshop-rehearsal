@@ -65,6 +65,15 @@
 27. Erstelle neue Datei `src/lib/components/icons/Plus.svelte` mit unten angezeigtem Inhalt
 28. Füge `<Button>` in Variante `unstyled` mit `<Plus>` zum Card-Header hinzu
 29. Mache `<header>` zu `flex` mit `space-between` und `center` 
+30. Füge XMark-Icon hinzu mit unten stehendem Inhalt
+31. Erstelle neue Variable `story` in `StoryCreation` mit `{open: false, text: ""}`
+32. Verknüpfe Klick auf Plus-Button mit `story.open`-Toggle
+33. Zeige `<XMark>` wenn `story.open` sonst `<Plus>`
+34. Zeige Formular, wenn `story.open`, mit
+    - `on:submit|preventDefault`
+    - `input` mit max 60Z, required, placeholder=Storytext... und gebunden an `story.text`
+    - `button` type submit mit `Erstellen`
+35. Füge Formular-Style hinzu: grid 4fr 1fr, gap .5
 
 
 ## Trash Icon
@@ -129,6 +138,33 @@
     stroke-linecap="round"
     stroke-linejoin="round"
     d="M12 4.5v15m7.5-7.5h-15"
+  />
+</svg>
+```
+
+## X-Mark Icon
+
+```html
+<script>
+  export let title = "Schließen";
+  export let width = 24;
+  export let height = 24;
+</script>
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+  {width}
+  {height}
+>
+  <title>{title}</title>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M6 18L18 6M6 6l12 12"
   />
 </svg>
 ```
