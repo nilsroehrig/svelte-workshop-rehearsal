@@ -10,20 +10,24 @@ export function createEstimationStore({ useLocalStorage = true }) {
   return {
     subscribe: store.subscribe,
     add(estimation) {
+      const newEstimation = {
+        id: crypto.randomUUID(),
+        created: new Date(),
+        ...estimation,
+      };
+
       store.update((estimations) => {
         const newValue = [
           ...estimations,
-          {
-            id: crypto.randomUUID(),
-            created: new Date(),
-            ...estimation,
-          },
+          newEstimation
         ];
 
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newValue));
 
         return newValue;
       });
+
+      return newEstimation;
     },
 
     remove(id) {

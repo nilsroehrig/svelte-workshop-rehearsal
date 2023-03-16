@@ -30,6 +30,16 @@
 20. Benenne `.delete-button` um in `.unstyled`
 21. Importiere `Button`-Komponente in `EstimationList.svelte`
 22. Ersetze Lösch-Button mit passender Verwendung von `<Button>` und Variante `unstyled`
+23. Erweitere die `add`-Methode in `estimations.js`
+    - Verschiebe die Erzeugung des neuen Schätzungs-Objekts aus `update` direkt unter `add`
+    - Füge das neue Objekt innerhalb von `update` dem Store hinzu
+    - Gib das Als Rückgabewert von `add` zurück
+24. In `EstimationCreation.svelte`, 
+    - erweitere Vorgabewert von `estimation` um `status: 'created'`
+    - in `submitEstimation` 
+      - speichere das Ergebnis von `estimations.add` in `addedEstimation`
+      - ersetze navigation-argumente durch `{ page: "create_stories", params: { id: addedEstimation.id }}`
+    - Benenne Button `Speichern` in `Weiter` um
 
 ## Trash Icon
 

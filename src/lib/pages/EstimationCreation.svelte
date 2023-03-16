@@ -2,14 +2,17 @@
   import { createEventDispatcher, getContext } from "svelte";
 
   const dispatch = createEventDispatcher();
-  
+
   export let estimations = getContext("estimations");
 
-  let estimation = { title: "", description: "" };
+  let estimation = { title: "", description: "", status: "created" };
 
   function submitEstimation() {
-    estimations.add(estimation);
-    dispatch("navigation:goto", { page: "menu" });
+    const addedEstimation = estimations.add(estimation);
+    dispatch("navigation:goto", {
+      page: "create_stories",
+      params: { id: addedEstimation.id },
+    });
   }
 
   function gotoMenu() {
@@ -30,7 +33,7 @@
   <br />
 
   <button type="button" on:click={gotoMenu}>Zurück</button>
-  <button type="submit">Speichern</button>
+  <button type="submit">Weiter</button>
 </form>
 
 <style>
