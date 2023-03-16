@@ -12,6 +12,7 @@
   let story = {
     open: false,
     text: "",
+    inputRef: null,
   };
 
   $: estimation = $estimations.find(({ id: eid }) => eid === id);
@@ -22,6 +23,10 @@
   function gotoMenu() {
     dispatch("navigation:goto", { page: "menu" });
   }
+
+  function focusAction(node) {
+    node.focus();
+  }
 </script>
 
 <h1>Stories Erstellen</h1>
@@ -29,10 +34,7 @@
 <article>
   <header>
     <strong>{estimation.title}</strong>
-    <Button
-      variant="unstyled"
-      on:click={() => (story.open = !story.open)}
-    >
+    <Button variant="unstyled" on:click={() => (story.open = !story.open)}>
       {#if story.open}
         <XMark />
       {:else}
@@ -47,8 +49,10 @@
         type="text"
         maxlength="60"
         required
-        bind:value={story.text}
         placeholder="Storytext..."
+        use:focusAction
+        bind:value={story.text}
+        bind:this={story.inputRef}
       />
       <button type="submit">Erstellen</button>
     </form>

@@ -74,6 +74,12 @@
     - `input` mit max 60Z, required, placeholder=Storytext... und gebunden an `story.text`
     - `button` type submit mit `Erstellen`
 35. Füge Formular-Style hinzu: grid 4fr 1fr, gap .5
+36. Füge `inputRef: null` zu `story` hinzu
+37. Erstelle Funktion `focusAction(node){node.focus()}`
+38. Ergänze `<input>`-Attribute
+    - `use:focusAction`
+    - `bind:this={story.inputRef}`
+39. 
 
 
 ## Trash Icon
