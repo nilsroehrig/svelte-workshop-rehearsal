@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher, getContext } from "svelte";
+  import Button from "../components/Button.svelte";
   import Trash from "../components/icons/Trash.svelte";
 
   const dispatch = createEventDispatcher();
@@ -20,11 +21,9 @@
   <article>
     <header>
       <h2>{estimation.title}</h2>
-      <button
-        class="delete-button"
-        type="button"
-        on:click={() => estimations.remove(estimation.id)}><Trash /></button
-      >
+      <Button variant="unstyled" on:click={() => estimations.remove(estimation.id)}>
+        <Trash />
+      </Button>
     </header>
     <p>Erstellt: {dateAsString}</p>
     <p>{estimation.description}</p>
@@ -50,14 +49,5 @@
   h2 {
     margin: 0;
     font-size: 1rem;
-  }
-
-  .delete-button {
-    display: inline-flex;
-    border: none;
-    background: transparent;
-    width: auto;
-    padding: 0;
-    margin: 0;
   }
 </style>

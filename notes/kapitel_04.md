@@ -22,6 +22,14 @@
 13. Füge Klasse `delete-button` zu Lösch-Button hinzu
     - Nutze unten stehende Styles
 14. Füge Styles für `<header>` als flex-container mit y-zentrierung und space-between hinzu
+15. Erstelle neue Datei `src/lib/components/Button.svelte`
+16. Erstelle Prop `variant` mit Vorgabewert `default`
+17. Erstelle Reactive Statement für `unstyled = variant === 'unstyled'`
+18. Erstelle `<button>` mit Klick-Forwarding, `class:unstyled` Direktive und `{...$restProps}` spreading
+19. Verschiebe `.delete-button` styles aus `EstimationList.svelte` in `Button.svelte`
+20. Benenne `.delete-button` um in `.unstyled`
+21. Importiere `Button`-Komponente in `EstimationList.svelte`
+22. Ersetze Lösch-Button mit passender Verwendung von `<Button>` und Variante `unstyled`
 
 ## Trash Icon
 
@@ -54,7 +62,6 @@
 
 ```css
 .delete-button {
-  display: inline-flex;
   border: none;
   background: transparent;
   width: auto;
