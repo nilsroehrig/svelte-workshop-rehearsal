@@ -30,3 +30,18 @@
     - Ersetze dipatchtes Event durch `navigation:goto` mit Argument `{ page: 'menu' }`
 13. In `EstimationList.svelte`, initialisiere Prop `estimations` mit `getContext('estimations')`
 14. Präfixe `estimations` im `{#each}`-Block mit `$` um über Store-Inhalt zu iterieren
+15. In `estimations.js`, aktualisiere Store-Objekt wie folgt:
+    - `add`-Methode:
+      - Erweitere neue Schätzung in `newValue` um 
+        - `id = crypto.randomUUID()`
+        - `created = new Date()`
+    - Erstelle `remove`-Methode mit `id` als Parameter
+      - Aktualisiere Store mit `newValue` = gefilterten Schätzungen nach ID
+      - Speichere Aktualisierung im LocalStorage
+16. Erweitere `try`-Block in `getInitialValue`:
+    - Mappe Estimations nach dem Parsen auf neue Objekte:
+      - `id: crypto.randomUUID()`,
+      - `created: created ? new Date(created) : null`
+      - `...rest`
+    - Speichere gemappte Estimations im LocalStorage
+    - Gib gemappte Estimations zurück

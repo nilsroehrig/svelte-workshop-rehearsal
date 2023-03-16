@@ -11,8 +11,27 @@ export function createEstimationStore({ useLocalStorage = true }) {
     subscribe: store.subscribe,
     add(estimation) {
       store.update((estimations) => {
-        const newValue = [...estimations, estimation];
+        const newValue = [
+          ...estimations,
+          {
+            id: crypto.randomUUID(),
+            created: new Date(),
+            ...estimation,
+          },
+        ];
+
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newValue));
+
+        return newValue;
+      });
+    },
+
+    remove(id) {
+      store.update((estimations) => {
+        const newValue = estimations.filter(
+          (estimation) => estimation.id !== id
+        );
+        localStorage.setItem(STORAGE_KEY, newValue);
         return newValue;
       });
     },
@@ -31,7 +50,20 @@ function getInitialValue(useLocalStorage) {
   }
 
   try {
-    return JSON.parse(storageItem);
+    const parsedEstimations = JSON.parse(storageItem);
+
+    const mappedEstimations = parsedEstimations.map((estimation) => {
+      const { created, ...rest } = estimation;
+
+      return {
+        id: crypto.randomUUID(),
+        created: created ? new Date(created) : null,
+        ...rest,
+      };
+    });
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(mappedEstimations));
+    return mappedEstimations;
   } catch (e) {
     console.error(e);
     return [];
