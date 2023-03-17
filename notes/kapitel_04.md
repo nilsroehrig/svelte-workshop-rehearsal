@@ -100,6 +100,7 @@
 51. Füge `estimations.update({ ...estimation, status: "estimated" })` und gotoMenu zu Abschluss-Button hinzu
 52. Generelles Styling für Überschrift
 53. .estimate + 1rem margin bottom
+54. Füge Anzeige von Status und Stories zu EstimationList hinzu
 
 
 ## Trash Icon
