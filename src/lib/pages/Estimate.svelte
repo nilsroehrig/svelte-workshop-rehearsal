@@ -14,14 +14,22 @@
 
   function doDrop(size, dataTransfer) {
     const id = dataTransfer.getData("text/plain");
-    estimation.stories = estimation.stories.map(story => {
+    estimation.stories = estimation.stories.map((story) => {
       if (story.id === id) {
-        console.log("happened")
-        story.size = size
+        story.size = size;
       }
 
       return story;
-    })
+    });
+  }
+
+  function gotoMenu() {
+    dispatch("navigation:goto", { page: "menu" });
+  }
+
+  function finishEstimation() {
+    estimations.update({ ...estimation, status: "estimated" });
+    gotoMenu();
   }
 </script>
 
@@ -67,11 +75,20 @@
   </div>
 </div>
 
+<button on:click={gotoMenu}>Zurück</button>
+<button on:click={finishEstimation}>Abschließen</button>
+
 <style>
+  h1 {
+    margin: 2rem 0;
+    text-align: center;
+  }
+
   .estimate {
     display: grid;
     grid-template-columns: 200px 1fr;
     gap: 1rem;
+    margin-bottom: 1rem;
   }
 
   .stories {

@@ -95,6 +95,11 @@
 46. Füge `Estimate`-Page wie unten angegeben hinzu
 47. Füge Zweig für Estimate analog zu StoryCreation in `App.svelte` hinzu
 48. Füge Drag And Drop-Logik zu `Estimate` hinzu. Siehe [Estimate.svelte](../src/lib/pages/Estimate.svelte)
+49. Füge Zurück- und Abschluss-Buttons hinzu
+50. Füge gotoMenu zu Zurück-Button hinzu
+51. Füge `estimations.update({ ...estimation, status: "estimated" })` und gotoMenu zu Abschluss-Button hinzu
+52. Generelles Styling für Überschrift
+53. .estimate + 1rem margin bottom
 
 
 ## Trash Icon
