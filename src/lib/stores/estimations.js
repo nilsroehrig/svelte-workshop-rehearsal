@@ -17,10 +17,7 @@ export function createEstimationStore({ useLocalStorage = true }) {
       };
 
       store.update((estimations) => {
-        const newValue = [
-          ...estimations,
-          newEstimation
-        ];
+        const newValue = [...estimations, newEstimation];
 
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newValue));
 
@@ -37,6 +34,18 @@ export function createEstimationStore({ useLocalStorage = true }) {
         );
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newValue));
         return newValue;
+      });
+    },
+
+    update(estimationToUpdate) {
+      store.update((estimations) => {
+        const mappedEstimations = estimations.map((estimation) =>
+          estimation.id === estimationToUpdate.id
+            ? estimationToUpdate
+            : estimation
+        );
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(mappedEstimations));
+        return mappedEstimations;
       });
     },
   };

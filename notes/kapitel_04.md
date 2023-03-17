@@ -79,7 +79,9 @@
 38. Ergänze `<input>`-Attribute
     - `use:focusAction`
     - `bind:this={story.inputRef}`
-39. 
+39. Erweitere Estimation-Store um `update`-Methode mit unten stehendem Inhalt
+40. Erweitere `StoryCreation` um `addStory`-Funktion die `estimation.stories` um Story-Objekt mit random UUID und `story.text` erweitert und store updated.
+41. Verknüpfe `addStory` mit `on:submit`
 
 
 ## Trash Icon
@@ -173,4 +175,20 @@
     d="M6 18L18 6M6 6l12 12"
   />
 </svg>
+```
+
+### Update-Methode
+
+```js
+update(estimationToUpdate) {
+  store.update((estimations) => {
+    const mappedEstimations = estimations.map((estimation) =>
+      estimation.id === estimationToUpdate.id
+        ? estimationToUpdate
+        : estimation
+    );
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(mappedEstimations));
+    return mappedEstimations;
+  });
+}
 ```

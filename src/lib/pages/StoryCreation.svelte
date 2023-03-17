@@ -16,8 +16,9 @@
   };
 
   $: estimation = $estimations.find(({ id: eid }) => eid === id);
+
   $: if (estimation) {
-    estimation.stories = estimation.stories ?? [];
+    estimation.stories = estimation?.stories ?? [];
   }
 
   function gotoMenu() {
@@ -26,6 +27,18 @@
 
   function focusAction(node) {
     node.focus();
+  }
+
+  function addStory() {
+    estimation.stories = [
+      ...estimation.stories,
+      {
+        id: crypto.randomUUID(),
+        text: story.text,
+      },
+    ];
+
+    estimations.update(estimation);
   }
 </script>
 
@@ -44,7 +57,7 @@
   </header>
 
   {#if story.open}
-    <form on:submit|preventDefault>
+    <form on:submit|preventDefault={addStory}>
       <input
         type="text"
         maxlength="60"
