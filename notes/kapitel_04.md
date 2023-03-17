@@ -94,6 +94,7 @@
 46. Erstelle Weiter-Button und verknüpfe mit `finishEstimationPreparation`
 46. Füge `Estimate`-Page wie unten angegeben hinzu
 47. Füge Zweig für Estimate analog zu StoryCreation in `App.svelte` hinzu
+48. Füge Drag And Drop-Logik zu `Estimate` hinzu. Siehe [Estimate.svelte](../src/lib/pages/Estimate.svelte)
 
 
 ## Trash Icon
@@ -235,7 +236,7 @@ update(estimationToUpdate) {
   import { createEventDispatcher, getContext } from "svelte";
 
   const dispatch = createEventDispatcher();
-  const sizes = [1, 2, 3, 5, 8, 13];
+  const sizes = [3, 5, 8, 13, 21].reverse();
 
   export let estimations = getContext("estimations");
   export let id;

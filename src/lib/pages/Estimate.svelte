@@ -2,27 +2,66 @@
   import { createEventDispatcher, getContext } from "svelte";
 
   const dispatch = createEventDispatcher();
-  const sizes = [1, 2, 3, 5, 8, 13].reverse();
+  const sizes = [3, 5, 8, 13, 21].reverse();
 
   export let estimations = getContext("estimations");
   export let id;
 
   $: estimation = $estimations.find(({ id: eid }) => eid === id);
-  $: stories = estimation.stories;
+  $: unestimatedStories = estimation.stories.filter(
+    (story) => story.size === undefined
+  );
+
+  function doDrop(size, dataTransfer) {
+    const id = dataTransfer.getData("text/plain");
+    estimation.stories = estimation.stories.map(story => {
+      if (story.id === id) {
+        console.log("happened")
+        story.size = size
+      }
+
+      return story;
+    })
+  }
 </script>
 
 <h1>Schätzung Durchführen</h1>
 
 <div class="estimate">
   <div class="stories">
-    {#each stories as story (story.id)}
-      <div class="story">{story.text}</div>
+    {#each unestimatedStories as story (story.id)}
+      <div
+        class="story"
+        draggable="true"
+        on:dragstart={(event) =>
+          event.dataTransfer.setData("text/plain", story.id)}
+      >
+        {story.text}
+      </div>
     {/each}
   </div>
   <div class="sizes">
     {#each sizes as size}
-      <div class="size">
+      {@const estimatedStories = estimation.stories.filter(
+        (story) => story.size === size
+      )}
+      <div
+        class="size"
+        on:dragenter|preventDefault
+        on:dragover|preventDefault
+        on:drop={({ dataTransfer }) => doDrop(size, dataTransfer)}
+      >
         <strong>{size}</strong>
+        {#each estimatedStories as story (story.id)}
+          <div
+            class="story"
+            draggable="true"
+            on:dragstart={(event) =>
+              event.dataTransfer.setData("text/plain", story.id)}
+          >
+            {story.text}
+          </div>
+        {/each}
       </div>
     {/each}
   </div>
@@ -38,7 +77,7 @@
   .stories {
     display: grid;
     background-color: rgba(255, 255, 255, 0.1);
-    border-radius: var(--border-radius, .25rem);
+    border-radius: var(--border-radius, 0.25rem);
     align-items: center;
     justify-content: center;
     grid-template-areas: "x";
@@ -65,7 +104,7 @@
   .size {
     min-height: 200px;
     background-color: rgba(255, 255, 255, 0.1);
-    border-radius: var(--border-radius, .25rem);
-    padding: .5rem;
+    border-radius: var(--border-radius, 0.25rem);
+    padding: 0.5rem;
   }
 </style>
