@@ -66,22 +66,28 @@
 28. Füge `<Button>` in Variante `unstyled` mit `<Plus>` zum Card-Header hinzu
 29. Mache `<header>` zu `flex` mit `space-between` und `center` 
 30. Füge XMark-Icon hinzu mit unten stehendem Inhalt
-31. Erstelle neue Variable `story` in `StoryCreation` mit `{open: false, text: ""}`
-32. Verknüpfe Klick auf Plus-Button mit `story.open`-Toggle
-33. Zeige `<XMark>` wenn `story.open` sonst `<Plus>`
-34. Zeige Formular, wenn `story.open`, mit
+31. Erstelle neue Variable `storyForm` in `StoryCreation` mit `{open: false, text: ""}`
+32. Verknüpfe Klick auf Plus-Button mit `storyForm.open`-Toggle
+33. Zeige `<XMark>` wenn `storyForm.open` sonst `<Plus>`
+34. Zeige Formular, wenn `storyForm.open`, mit
     - `on:submit|preventDefault`
-    - `input` mit max 60Z, required, placeholder=Storytext... und gebunden an `story.text`
+    - `input` mit max 60Z, required, placeholder=Storytext... und gebunden an `storyForm.text`
     - `button` type submit mit `Erstellen`
 35. Füge Formular-Style hinzu: grid 4fr 1fr, gap .5
-36. Füge `inputRef: null` zu `story` hinzu
+36. Füge `inputRef: null` zu `storyForm` hinzu
 37. Erstelle Funktion `focusAction(node){node.focus()}`
 38. Ergänze `<input>`-Attribute
     - `use:focusAction`
-    - `bind:this={story.inputRef}`
+    - `bind:this={storyForm.inputRef}`
 39. Erweitere Estimation-Store um `update`-Methode mit unten stehendem Inhalt
-40. Erweitere `StoryCreation` um `addStory`-Funktion die `estimation.stories` um Story-Objekt mit random UUID und `story.text` erweitert und store updated.
+40. Erweitere `StoryCreation` um `addStory`-Funktion die `estimation.stories` um Story-Objekt mit random UUID und `storyForm.text` erweitert und store updated.
 41. Verknüpfe `addStory` mit `on:submit`
+42. Wrappe Fallback Text mit `div.stories`
+43. Füge `{#each}`-Block zur Iteration über Stories hinzu
+    - Packe `div.story` mit `story.text` in `each`-Zweig
+    - Packe Fallback Text in den `else`-Zweig
+    - Füge Klasse `.fallback-text` an Fallback text an
+44. Füge Stylesheet wie unten angegeben hinzu
 
 
 ## Trash Icon
@@ -191,4 +197,27 @@ update(estimationToUpdate) {
     return mappedEstimations;
   });
 }
+```
+
+## Stories-Stylesheet
+
+```css
+.stories {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .story {
+    padding: 1rem;
+    background-color: rgba(0,0,0,0.2);
+    border-radius:var(--border-radius, 0.25);
+    overflow: hidden;
+  }
+
+  .fallback-text {
+    margin: 0;
+    grid-column: 1 / -1;
+    text-align: center;
+  }
 ```

@@ -9,7 +9,7 @@
   export let estimations = getContext("estimations");
   export let id;
 
-  let story = {
+  let storyForm = {
     open: false,
     text: "",
     inputRef: null,
@@ -34,7 +34,7 @@
       ...estimation.stories,
       {
         id: crypto.randomUUID(),
-        text: story.text,
+        text: storyForm.text,
       },
     ];
 
@@ -47,8 +47,11 @@
 <article>
   <header>
     <strong>{estimation.title}</strong>
-    <Button variant="unstyled" on:click={() => (story.open = !story.open)}>
-      {#if story.open}
+    <Button
+      variant="unstyled"
+      on:click={() => (storyForm.open = !storyForm.open)}
+    >
+      {#if storyForm.open}
         <XMark />
       {:else}
         <Plus />
@@ -56,7 +59,7 @@
     </Button>
   </header>
 
-  {#if story.open}
+  {#if storyForm.open}
     <form on:submit|preventDefault={addStory}>
       <input
         type="text"
@@ -64,14 +67,22 @@
         required
         placeholder="Storytext..."
         use:focusAction
-        bind:value={story.text}
-        bind:this={story.inputRef}
+        bind:value={storyForm.text}
+        bind:this={storyForm.inputRef}
       />
       <button type="submit">Erstellen</button>
     </form>
   {/if}
 
-  <p>Bislang hat diese Schätzung noch keine Stories.</p>
+  <div class="stories">
+    {#each estimation.stories as story (story.id)}
+      <div class="story">{story.text}</div>
+    {:else}
+      <p class="fallback-text">
+        Bislang hat diese Schätzung noch keine Stories.
+      </p>
+    {/each}
+  </div>
 </article>
 
 <details>
@@ -93,13 +104,28 @@
     align-items: center;
   }
 
-  article > p {
-    margin: 0;
-  }
-
   form {
     display: grid;
     grid-template-columns: 4fr 1fr;
     gap: 0.5rem;
+  }
+
+  .stories {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .story {
+    padding: 1rem;
+    background-color: rgba(0,0,0,0.2);
+    border-radius:var(--border-radius, 0.25);
+    overflow: hidden;
+  }
+
+  .fallback-text {
+    margin: 0;
+    grid-column: 1 / -1;
+    text-align: center;
   }
 </style>
