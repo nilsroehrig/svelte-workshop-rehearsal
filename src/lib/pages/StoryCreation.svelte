@@ -40,6 +40,14 @@
 
     estimations.update(estimation);
   }
+
+  function finishEstimationPreparation() {
+    estimations.update({ ...estimation, status: "prepared" });
+    dispatch("navigation:goto", {
+      page: "estimate",
+      params: { id: estimation.id },
+    });
+  }
 </script>
 
 <h1>Stories Erstellen</h1>
@@ -91,6 +99,7 @@
 </details>
 
 <button on:click={gotoMenu}>Zurück</button>
+<button on:click={finishEstimationPreparation}>Weiter</button>
 
 <style>
   h1 {
@@ -118,8 +127,8 @@
 
   .story {
     padding: 1rem;
-    background-color: rgba(0,0,0,0.2);
-    border-radius:var(--border-radius, 0.25);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius, 0.25);
     overflow: hidden;
   }
 

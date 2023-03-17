@@ -1,4 +1,5 @@
 <script>
+  import Estimate from "./lib/pages/Estimate.svelte";
   import EstimationCreation from "./lib/pages/EstimationCreation.svelte";
   import EstimationList from "./lib/pages/EstimationList.svelte";
   import Menu from "./lib/pages/Menu.svelte";
@@ -20,6 +21,8 @@
     <EstimationList on:navigation:goto={setPage} />
   {:else if currentView === "create_stories"}
     <StoryCreation on:navigation:goto={setPage} id={viewArgs?.id} />
+  {:else if currentView === "estimate"}
+    <Estimate on:navigation:goto={setPage} id={viewArgs?.id} />
   {:else}
     <Menu on:navigation:goto={setPage} />
   {/if}
